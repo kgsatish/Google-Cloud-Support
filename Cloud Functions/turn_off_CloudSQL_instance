@@ -15,11 +15,12 @@ def hello_world(request):
     response = request.execute()
     j = response["settings"]
     settingsVersion = int(j["settingsVersion"])
+    tier = int(j["tier"])
 
     dbinstancebody = {
        "settings": {
            "settingsVersion": settingsVersion,
-           "tier": "db-n1-standard-1",
+           "tier": tier,
            "activationPolicy": "Never"
        }
     }
@@ -29,7 +30,7 @@ def hello_world(request):
        instance=instance,
        body=dbinstancebody)
     response = request.execute()
-# pprint(response)
+    # pprint(response)
 
     request_json = request.get_json()
 
